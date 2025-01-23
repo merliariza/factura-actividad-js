@@ -1,3 +1,4 @@
+//Modelo de almacenamiento para las facturas
 const InvoiceModel = {
     factura: { numInvoice: '' },
     header: {
@@ -19,5 +20,5 @@ const InvoiceModel = {
         total: '',
     }
 };
-
+//Exportación del modelo de almacenamiento
 export default InvoiceModel;

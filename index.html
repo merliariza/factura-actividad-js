@@ -4,38 +4,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Links para Bootstrap-->
   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
   <script src="js/bootstrap/bootstrap.min.js"></script>
+  <!--Archivo principal JS-->
   <script type="module" src="app.js" defer></script>
   <title>Factura</title>
 </head>
 
 <body>
-
+  <!--Contenedor general-->
   <div class="container">
     <div class="row justify-content-md-center mt-3">
       <div class="col-1">
       </div>
       <div class="col-10">
         <div class="card">
+          <!--Encabezado-->
           <div class="card-header">
             Compras
           </div>
           <div class="card-body">
+            <!--Título para la sección facturas-->
             <h5 class="card-title">Factura</h5>
+            <!--Formulario para facturas-->
             <form class="row g-3" id="frmDataInvoice">
+              <!--Componente web para facturas-->
               <invoice-component></invoice-component>
             </form>
           </div>
           <div class="col-12">
             <div class="card">
               <div class="card-body">
+                <!--Título para la sección productos-->
                 <h5 class="card-title">Productos</h5>
+                <!--Formulario para productos-->
                 <form class="row g-3" id="frmDataProduct">
+                  <!--Componente web para productos-->
                   <product-component></product-component>
                 </form>
               </div>
-
+              <!--Botón para añadir productos-->
               <button type="button" class="btn btn-dark" id="addProduct">+</button>
               <br>
               <div class="table-responsive">
@@ -45,9 +54,9 @@
                       <th scope="col" class="text-nowrap">Cod</th>
                       <th scope="col" class="text-nowrap">Nombre</th>
                       <th scope="col" class="text-nowrap">V/Unit</th>
-                      <th scope="col" class="text-nowrap">Cant</th>
-                      <th scope="col" class="text-nowrap">Subtot</th>
-                      <th scope="col" class="text-nowrap">Acciones</th>
+                      <th scope="col" class="text-nowrap">Cantidad</th>
+                      <th scope="col" class="text-nowrap">Subtotal</th>
+                      <th scope="col" class="text-nowrap"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -58,6 +67,7 @@
                       <td></td>
                       <td></td>
                       <td>
+                        <!--Botón para eliminar productos-->
                         <button type="button" class="btn btn-sm btn-dark" id="addPlayer">X</button>
                       </td>
                     </tr>
@@ -81,7 +91,7 @@
                   </tr>
                 </tbody>
               </table>
-
+              <!--Botón para pagar y almacenar la información de la factura-->
               <button type="submit" class="btn btn-dark col-12">Pagar</button>
 
             </div>

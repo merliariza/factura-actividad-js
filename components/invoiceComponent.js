@@ -1,4 +1,6 @@
+//Importación del modelo de almacenamiento de facturas
 import '../models/invoiceModel.js';
+//Exportación del componente web para factura
 export class InvoiceComponent extends HTMLElement {
     constructor() {
         super();
