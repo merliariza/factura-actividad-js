@@ -23,74 +23,72 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">Factura</h5>
-            <img src="" alt="" class="logoLoad">
-              <form class="row g-3" id="frmDataLiga">
-                <invoice-component></invoice-component>
-              </form>
-        </div>
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Productos</h5>
-              <img src="" alt="" class="logoLoad">
-              <form class="row g-3" id="frmDataLiga">
-                <product-component></product-component>
-              </form>
-            </div>
+            <form class="row g-3" id="frmDataInvoice">
+              <invoice-component></invoice-component>
+            </form>
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Productos</h5>
+                <form class="row g-3" id="frmDataProduct">
+                  <product-component></product-component>
+                </form>
+              </div>
 
-            <button type="button" class="btn btn-dark" id="addPlayer">+</button>
-            <br>
-            <div class="table-responsive">
-              <table class="table table-sm table-bordered table-hover">
-                <thead class="table-dark">
-                  <tr>
-                    <th scope="col" class="text-nowrap">Cod</th>
-                    <th scope="col" class="text-nowrap">Nombre</th>
-                    <th scope="col" class="text-nowrap">V/Unit</th>
-                    <th scope="col" class="text-nowrap">Cant</th>
-                    <th scope="col" class="text-nowrap">Subtot</th>
-                    <th scope="col" class="text-nowrap">Acciones</th>
-                  </tr>
-                </thead>
+              <button type="button" class="btn btn-dark" id="addProduct">+</button>
+              <br>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered table-hover">
+                  <thead class="table-dark">
+                    <tr>
+                      <th scope="col" class="text-nowrap">Cod</th>
+                      <th scope="col" class="text-nowrap">Nombre</th>
+                      <th scope="col" class="text-nowrap">V/Unit</th>
+                      <th scope="col" class="text-nowrap">Cant</th>
+                      <th scope="col" class="text-nowrap">Subtot</th>
+                      <th scope="col" class="text-nowrap">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <button type="button" class="btn btn-sm btn-dark" id="addPlayer">X</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <table class="table row g-3">
                 <tbody>
                   <tr>
+                    <th scope="row">Subtotal</th>
                     <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">IVA</th>
                     <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total</th>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-sm btn-dark" id="addPlayer">X</button>
-                    </td>
                   </tr>
                 </tbody>
               </table>
+
+              <button type="submit" class="btn btn-dark col-12">Pagar</button>
+
             </div>
-
-            <table class="table row g-3">
-              <tbody>
-                <tr>
-                  <th scope="row">Subtotal</th>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">IVA</th>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">Total</th>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <button type="submit" class="btn btn-dark col-12">Pagar</button>
-
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </body>
 
