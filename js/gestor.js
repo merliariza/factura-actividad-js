@@ -73,8 +73,8 @@ const productTableManager = {
     removeProductRow(event) {
         const row = event.target.closest('tr');
         if (row) {
-            row.remove(); // Eliminar la fila del producto
-            this.updateTotalSummary(); // Actualizar el resumen
+            row.remove(); 
+            this.updateTotalSummary(); 
         }
     },
 
