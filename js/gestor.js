@@ -15,10 +15,6 @@ const productTableManager = {
 
     addProductRow() {
         const productComponent = document.querySelector('product-component');
-
-        // Actualizar y generar un nuevo código de producto
-        productComponent.updateProductCode();
-
         const shadowRoot = productComponent.shadowRoot;
         if (!shadowRoot) {
             alert('El componente no tiene un shadowRoot.');
@@ -35,22 +31,32 @@ const productTableManager = {
 
         // Validar los datos antes de procesarlos
         if (this.validateProductData(productData)) {
-            const subtotal = (parseFloat(unitPrice) * parseInt(quantity)).toFixed(2);
+            // Verificar si el producto ya existe
+            const existingRow = this.findExistingProductRow(nameProduct);
+            
+            if (existingRow) {
+                // Actualizar fila existente
+                this.updateExistingProductRow(existingRow, productData);
+            } else {
+                // Agregar nueva fila
+                const subtotal = (parseFloat(unitPrice) * parseInt(quantity)).toFixed(2);
+                
+                const rowHTML = `
+                    <tr>
+                        <td>${codProduct}</td>
+                        <td>${nameProduct}</td>
+                        <td>${unitPrice}</td>
+                        <td>${quantity}</td>
+                        <td>${subtotal}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-dark remove-btn">X</button>
+                        </td>
+                    </tr>
+                `;
 
-            const rowHTML = `
-                <tr>
-                    <td>${codProduct}</td>
-                    <td>${nameProduct}</td>
-                    <td>${unitPrice}</td>
-                    <td>${quantity}</td>
-                    <td>${subtotal}</td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-dark remove-btn">X</button>
-                    </td>
-                </tr>
-            `;
+                this.tableBody.innerHTML += rowHTML;
+            }
 
-            this.tableBody.innerHTML += rowHTML;
             this.updateTotalSummary();
 
             // Limpiar los campos del componente
@@ -61,6 +67,27 @@ const productTableManager = {
             // Generar un nuevo código de producto para el siguiente registro
             productComponent.updateProductCode();
         }
+    },
+
+    findExistingProductRow(productName) {
+        const rows = this.tableBody.querySelectorAll('tr');
+        return Array.from(rows).find(row => 
+            row.cells[1].textContent.trim() === productName
+        );
+    },
+
+    updateExistingProductRow(row, newProductData) {
+        const quantityCell = row.cells[3];
+        const subtotalCell = row.cells[4];
+        
+        const currentQuantity = parseInt(quantityCell.textContent);
+        const newQuantity = currentQuantity + parseInt(newProductData.quantity);
+        const unitPrice = parseFloat(row.cells[2].textContent);
+        
+        const newSubtotal = (unitPrice * newQuantity).toFixed(2);
+        
+        quantityCell.textContent = newQuantity;
+        subtotalCell.textContent = newSubtotal;
     },
 
     removeProductRow(event) {
@@ -77,7 +104,7 @@ const productTableManager = {
         const isNumericQuantity = !isNaN(parseInt(productData.quantity));
 
         if (!isValid) {
-            alert('Por favor, complete todos los campos del producto');
+            alert('Por favor complete todo el formulario del producto');
             return false;
         }
 
@@ -110,15 +137,14 @@ const productTableManager = {
     }
 };
 
-// Inicializar el manejador al cargar la página
+// Inicializar al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     productTableManager.init();
 
-    // Delegar evento para eliminar productos
+    // Evento para eliminar productos
     document.querySelector('table tbody').addEventListener('click', (event) => {
         if (event.target.classList.contains('remove-btn')) {
             productTableManager.removeProductRow(event);
         }
     });
 });
-
