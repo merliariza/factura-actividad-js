@@ -7,14 +7,41 @@ export class ProductComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.render();
     }
-    render(){
-        
-        this.shadowRoot.innerHTML =  /* html */ `
+
+    connectedCallback() {
+        this.updateProductCode();
+    }
+
+    updateProductCode() {
+        const productCode = this.generateProductCode();
+        const codProductElement = this.shadowRoot.getElementById('codProduct');
+
+        if (codProductElement) {
+            codProductElement.textContent = productCode;
+        } else {
+            console.error('Elemento codProduct no encontrado en el shadowRoot.');
+        }
+    }
+
+    generateProductCode() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        return `PROD-${year}${month}${day}-${hours}${minutes}${seconds}`;
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = /* html */ `
         <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
         <div class="row g-3">
             <div class="col-md-6">
                 <label for="codProduct" class="form-label">Cod Producto</label>
-                <input type="text" class="form-control" name="codProduct" id="codProduct">
+                <div id="codProduct"></div>
             </div>
             <div class="col-12">
                 <label for="nameProduct" class="form-label">Nombre</label>
@@ -29,7 +56,8 @@ export class ProductComponent extends HTMLElement {
                 <input type="text" class="form-control" name="quantity" id="quantity">
             </div>
         </div>
-        `
+        `;
     }
 }
-customElements.define("product-component",ProductComponent);
+
+customElements.define("product-component", ProductComponent);

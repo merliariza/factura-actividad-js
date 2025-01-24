@@ -7,14 +7,35 @@ export class InvoiceComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.render();
     }
-    
-    render(){
+    connectedCallback() {
+        // Generate invoice number when component is added to DOM
+        this.updateInvoiceNumber();
+    }
+
+    updateInvoiceNumber() {
+        const invoiceNumber = this.generateInvoiceNumber();
+        this.shadowRoot.getElementById('invoiceNumber').textContent = invoiceNumber;
+    }
+
+    generateInvoiceNumber() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+        return `FAC-${year}${month}${day}-${hours}${minutes}${seconds}-${milliseconds}`;
+    }
+    render() {
         this.shadowRoot.innerHTML = /* html */ `
         <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
         <div class="row g-3">
             <div class="col-12">
                 <label for="numInvoice" class="form-label">Nro Factura</label>
-                <input type="text" class="form-control" name="numInvoice" id="numInvoice">
+                <div id="invoiceNumber"></div>
             </div>
             <div class="col-12">
                 <label for="idInvoice" class="form-label">Nro Id</label>
