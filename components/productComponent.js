@@ -18,8 +18,6 @@ export class ProductComponent extends HTMLElement {
 
         if (codProductElement) {
             codProductElement.textContent = productCode;
-        } else {
-            console.error('Elemento codProduct no encontrado en el shadowRoot.');
         }
     }
 

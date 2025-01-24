@@ -8,7 +8,7 @@ export class InvoiceComponent extends HTMLElement {
         this.render();
     }
     connectedCallback() {
-        // Generate invoice number when component is added to DOM
+        // Genera el número de factura
         this.updateInvoiceNumber();
     }
 

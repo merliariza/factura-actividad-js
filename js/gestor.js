@@ -10,18 +10,11 @@ const productTableManager = {
 
         if (this.addProductButton) {
             this.addProductButton.addEventListener('click', () => this.addProductRow());
-        } else {
-            console.error("Botón 'addProduct' no encontrado.");
         }
     },
 
     addProductRow() {
         const productComponent = document.querySelector('product-component');
-
-        if (!productComponent) {
-            alert('Componente "product-component" no encontrado.');
-            return;
-        }
 
         // Actualizar y generar un nuevo código de producto
         productComponent.updateProductCode();
@@ -73,8 +66,8 @@ const productTableManager = {
     removeProductRow(event) {
         const row = event.target.closest('tr');
         if (row) {
-            row.remove(); 
-            this.updateTotalSummary(); 
+            row.remove();
+            this.updateTotalSummary();
         }
     },
 
